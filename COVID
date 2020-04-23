@@ -1,1 +1,42 @@
+##IMPORT##
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import numpy as np
+
+##READ CSV##
+covidData = pd.read_csv('/Users/Slikshot6/Desktop/Python/covid-data.csv', index_col='location') ##Reads the CSV in by locations as the new index
+df = pd.DataFrame(covidData)
+
+##Exploring The DataFrame##
+print(df.loc['United States']) #112 rows x 15 cols
+
+
+##PLOTTING DATA##
+usa_x_axis = df.loc['United States', 'date'] #Locating a slice of data, in the date column
+usa_y_axis = df.loc['United States', 'new_cases'] #setting Aruba's new case numbers
+plt.plot(usa_x_axis, usa_y_axis, color='g', label="USA's Daily COVID Cases")
+
+
+##STATISTICS##
+#print(df.loc['Aruba', 'new_cases'].describe())
+
+
+##GRAPH SETTINGS##
+#months = mdates.MonthLocator(interval=10)
+
+plt.tick_params(axis='x', labelsize= 10) ##Changing the label size of the x-axis.
+plt.xticks(rotation=90) ## rotates the x-axis 90 degrees
+
+plt.title("Daily Number of USA's New COVID-19 Cases, 3/13 - 4/20")
+plt.xlabel("Dates")
+plt.ylabel("Number of New Cases")
+plt.legend()
+#plt.savefig('USA_COVID_line)
+#plt.show()
+
+
+##Trying Out Different Solutions##
+# usa_x_axis.set_major_locator(plt.dates.YearLocator())
+# usa_x_axis.set_major_formatter(plt.dates.DateFormatter('%Y'))
 
